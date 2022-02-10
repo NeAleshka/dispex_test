@@ -43,8 +43,7 @@ export const Clients = () => {
       dispatch(getClients(flat.id));
     }
   }, [flat]);
-  // eslint-disable-next-line no-console
-  console.log(clients);
+
   return (
     <Box sx={{ paddingBottom: '20px' }}>
       <Box sx={{ display: 'flex',

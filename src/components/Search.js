@@ -6,12 +6,14 @@ import { selectStreet, selectHouse, selectFlat, saveAddress } from '../store/red
 
 export const Search = () => {
   const dispatch = useDispatch();
-  const { streets,
+  const {
+    streets,
     street,
     houses,
     house,
     flats,
-    errorOfRequest } = useSelector(state => state.addressReducer);
+    errorOfRequest
+  } = useSelector(state => state.addressReducer);
 
   useEffect(() => {
     dispatch(getStreets());
@@ -21,32 +23,38 @@ export const Search = () => {
     <>
       <Box
         component="p"
-        sx={{ fontSize: '18px',
-          marginBottom: '15px' }}
+        sx={{
+          fontSize: '18px',
+          marginBottom: '15px'
+        }}
       >
         Адрес
       </Box>
       <Box
-        sx={{ display: 'flex',
+        sx={{
+          display: 'flex',
           flexDirection: {
             xs: 'column',
             sm: 'row'
           },
-          marginBottom: '80px' }}
+          marginBottom: '80px'
+        }}
       >
         <Autocomplete
-          sx={{ width: {
-            xs: '100%',
-            sm: '400px'
-          },
-          marginRight: {
-            xs: '0',
-            sm: '5px'
-          },
-          marginBottom: {
-            xs: '10px',
-            sm: '0'
-          } }}
+          sx={{
+            width: {
+              xs: '100%',
+              sm: '400px'
+            },
+            marginRight: {
+              xs: '0',
+              sm: '5px'
+            },
+            marginBottom: {
+              xs: '10px',
+              sm: '0'
+            }
+          }}
           options={streets.filter(item => item.cityId === 1)}
           isOptionEqualToValue={(option, value) => option.id === value.id}
           getOptionLabel={option => option.name}
@@ -59,14 +67,17 @@ export const Search = () => {
           renderInput={params => (
             <TextField
               {...params}
+              placeholder="Выберите из списка"
               label="Улица"
             />
           )}
         />
         <Box sx={{ display: 'flex' }}>
           <Autocomplete
-            sx={{ width: 150,
-              marginRight: '5px' }}
+            sx={{
+              width: 150,
+              marginRight: '5px'
+            }}
             options={houses}
             getOptionLabel={houseItem => houseItem.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
@@ -90,13 +101,15 @@ export const Search = () => {
               dispatch(getFlats(house.id));
             }}
             onChange={(e, itemFlat) => {
-              dispatch(selectFlat(itemFlat));
-              dispatch(saveAddress());
+              if (itemFlat) {
+                dispatch(selectFlat(itemFlat));
+                dispatch(saveAddress());
+              }
             }}
             renderInput={params => (
               <TextField
                 {...params}
-                label="Кв./офис"
+                label="Квартира"
               />
             )}
           />
