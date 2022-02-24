@@ -1,6 +1,7 @@
 {
   "name": "dispex",
   "version": "0.1.0",
+  "homepage": "https://nealeshka.github.io/dispex_test/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.5.0",
